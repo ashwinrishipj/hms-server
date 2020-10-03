@@ -1,15 +1,6 @@
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const {userSchema} = require('../../dBSchema/mongoDbSchema');
-
-const generateToken = (userID, userEmail) => {
-    const token = jwt.sign(
-      { userID: userID, emailId: userEmail },
-      "superPrivateKey",
-      { expiresIn: "5h" }
-    );
-    return { token: token, tokenExpiration: 1 };
-  };
+const generateToken = require('../helpers/generateToken');
 
 const registerUser = (args) =>{
     return userSchema
