@@ -20,4 +20,35 @@ const userCredentials = new mongoDb.Schema({
 
 const userSchema = mongoDb.model("userCredential", userCredentials);
 
-module.exports = {userSchema };
+const todoList = new mongoDb.Schema(
+  {
+    userId: {
+      type: String,
+      required: true
+    },
+    tasks: [
+      {
+        title: {type : String},
+        content: {type : String},
+        date: {type : Date}
+      }
+    ],
+    completed: [
+      {
+        title: {type : String},
+        content: {type : String},
+        date: {type : Date}
+      }
+    ],
+    deleted: [
+      {
+        title: {type : String},
+        content: {type : String},
+        date: {type : Date}
+      }
+    ]
+  }
+)
+
+const toDoListSchema = mongoDb.model("todoList", todoList);
+module.exports = {userSchema,toDoListSchema };
