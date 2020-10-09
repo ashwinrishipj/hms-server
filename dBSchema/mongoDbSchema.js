@@ -23,8 +23,7 @@ const userSchema = mongoDb.model("userCredential", userCredentials);
 const todoList = new mongoDb.Schema(
   {
     userId: {
-      type: String,
-      required: true
+      type: String
     },
     tasks: [
       {

@@ -1,6 +1,7 @@
-const { insertTask, updateCompletedTask } = require('./mutation/mutateToDoList');
+const { insertTask, updateTask } = require('./mutation/mutateToDoList');
 const registerUser = require('./mutation/registerUser');
 const {authenticateUser} = require('./queries/authentication'); 
+const { retrieveToDoList } = require('./queries/todoTasks');
 
 resolvers = {
     registerUser : async (args) =>{
@@ -15,8 +16,8 @@ resolvers = {
     insertTask : async(args) =>{
         return insertTask(args);
     },
-    updateCompletedTask : async(args) =>{
-        return updateCompletedTask(args);
+    updateTask : async(args) =>{
+        return updateTask(args);
     }
 }
 

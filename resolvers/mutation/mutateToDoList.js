@@ -25,20 +25,37 @@ const insertTask = async (args) => {
 	return insertTask;
 };
 
-const updateCompletedTask = async (args) =>{
+const updateTask = async (args) =>{
     console.log('---- Inserting completedTask List in a to-do-list -----');
 
-    const deletingExistingTask = await toDoListSchema.findByIdAndUpdate(args.userId,{$pull: {"tasks" :{_id : args.id}}});
+    const taskDetails = {
+        title: args.input.title,
+        content: args.input.content,
+        date: args.input.date,
+    };
+
+    var insertCollectionName = args.input.updateTo;
+    var deleteCollectionName = args.input.from;
+    var deletingExistingTask,insertCompletedTask;
+
+    if (deleteCollectionName == "completed") 
+     deletingExistingTask = await toDoListSchema.findOneAndUpdate({"userId":args.input.userId},{$pull: {completed :{_id : args.input.id}}});
+    else
+     deletingExistingTask = await toDoListSchema.findOneAndUpdate({"userId":args.input.userId},{$pull: {tasks :{_id : args.input.id}}});
+    
     if (!deletingExistingTask){
         console.log("error in deleting existing task:",deletingExistingTask);
     }
-    console.log("task deleted",deletingExistingTask);
-    const insertCompletedTask = await toDoListSchema.findByIdAndUpdate(args.userId,{ $push: {completed: deletingExistingTask } },{new:true});
+
+    if (insertCollectionName == "deleted")
+     insertCompletedTask = await toDoListSchema.findOneAndUpdate({"userId" : args.input.userId},{ $push: {deleted : taskDetails } },{new:true});
+    else
+     insertCompletedTask = await toDoListSchema.findOneAndUpdate({"userId" : args.input.userId},{ $push: {completed : taskDetails } },{new:true});
+   
     if (!insertCompletedTask){
         console.log("error in inserting completed task",insertCompletedTask);
     }
-    console.log("result:",deletingExistingTask)
 	return insertCompletedTask;
 }
 
-module.exports = { insertTask , updateCompletedTask};
+module.exports = { insertTask , updateTask};

@@ -27,6 +27,16 @@ const schema = buildSchema(
         date: String
     }
 
+    input updateTask{
+        userId: String!,
+        id: String!,
+        title: String,
+        content: String,
+        date: String,
+        updateTo: String!,
+        from: String!
+    }
+
     type todoResponse{
         userId: String!,
         tasks: [taskData]
@@ -42,7 +52,7 @@ const schema = buildSchema(
     type rootMutations{
         registerUser(input : userCredentials! ) : validated!
         insertTask(input : insertToDoTask! ) : todoResponse!
-        updateCompletedTask(userId: ID!, id: ID!) : todoResponse!
+        updateTask(input : updateTask!) : todoResponse!
     }
 
     schema {
