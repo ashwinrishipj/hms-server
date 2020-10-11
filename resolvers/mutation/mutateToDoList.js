@@ -27,11 +27,11 @@ const insertTask = async (args) => {
 
 const updateTask = async (args) =>{
     console.log('---- Inserting completedTask List in a to-do-list -----');
-
+ 
     const taskDetails = {
         title: args.input.title,
         content: args.input.content,
-        date: args.input.date,
+        date: args.input.date
     };
 
     var insertCollectionName = args.input.updateTo;

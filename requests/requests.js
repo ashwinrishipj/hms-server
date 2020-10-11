@@ -1,7 +1,7 @@
-var {buildSchema} = require('graphql');
+var { buildSchema } = require('graphql');
 
 const schema = buildSchema(
-    `
+	`
     type validated{
         token : String!,
         tokenExpiration : Int!
@@ -37,6 +37,44 @@ const schema = buildSchema(
         from: String!
     }
 
+    input appointmentDetails {
+            userId: String!,
+            name: String!,
+            startDate:  String!,
+            time: String!,
+			endDate: String,
+			title: String,
+			description: String,
+			hospital: String!,
+			dept: String!
+    }
+
+    input updateAppointmentDetails{
+            _id: ID,
+            name: String!,
+            startDate:String!,
+            time:String!,
+            endDate:String!,
+            dept:String!
+    }
+
+    type appointmentData {
+        _id: ID!,
+        startDate:  String!,
+        time: String!,
+        endDate: String ,
+        title: String,
+        description: String,
+        hospital: String,
+        dept: String,
+        status:String!
+    }
+
+    type getAppointmentDetails {
+        userId: String!,
+        appointments:[appointmentData]
+    }
+
     type todoResponse{
         userId: String!,
         tasks: [taskData]
@@ -47,12 +85,15 @@ const schema = buildSchema(
     type rootQuery{
         validateUser(input : userCredentials!) : validated!
         getTodoList(userId : String!) : todoResponse!
+        getAppointmentDetails(userId: String!) : getAppointmentDetails!
     }
 
     type rootMutations{
         registerUser(input : userCredentials! ) : validated!
         insertTask(input : insertToDoTask! ) : todoResponse!
         updateTask(input : updateTask!) : todoResponse!
+        createAppointment(input : appointmentDetails!) : Boolean!
+        modifyAppointment(input: updateAppointmentDetails!) : Boolean!
     }
 
     schema {
@@ -61,4 +102,4 @@ const schema = buildSchema(
       }
     `
 );
-module.exports = {schema}
+module.exports = { schema };
