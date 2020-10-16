@@ -3,7 +3,8 @@ const registerUser = require('./mutation/registerUser');
 const {authenticateUser} = require('./queries/authentication'); 
 const {retrieveToDoList } = require('./queries/todoTasks');
 const {retrieveAppointments } = require('./queries/appointments');
-const {createAppointment, updateAppointmentDetails} = require('./mutation/mutateAppointments');
+const {createAppointment, updateAppointmentDetails, deleteAppointment} = require('./mutation/mutateAppointments');
+const { createNotes } = require('./mutation/mutateNotes');
 
 resolvers = {
     registerUser : async (args) =>{
@@ -29,6 +30,12 @@ resolvers = {
     },
     modifyAppointment: async(args) =>{
         return updateAppointmentDetails(args);
+    },
+    deleteAppointment: async(args)=>{
+        return deleteAppointment(args);
+    },
+    createNotes : async(args) =>{
+        return createNotes(args);
     }
 }
 

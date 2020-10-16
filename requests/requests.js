@@ -37,16 +37,27 @@ const schema = buildSchema(
         from: String!
     }
 
+    input hospitalDetails{
+        name: String!,
+        description: String!,
+        location:String!,
+        phoneNumber:String!
+    }
+    type hospitalDetailsResponse{
+        name: String!,
+        description: String!,
+        location:String!,
+        phoneNumber:String!
+    }
     input appointmentDetails {
             userId: String!,
             name: String!,
             startDate:  String!,
             time: String!,
-			endDate: String,
-			title: String,
-			description: String,
-			hospital: String!,
-			dept: String!
+			phoneNumber: String!,
+            description: String!,
+			hospital: hospitalDetails!
+            dept: String!
     }
 
     input updateAppointmentDetails{
@@ -54,18 +65,17 @@ const schema = buildSchema(
             name: String!,
             startDate:String!,
             time:String!,
-            endDate:String!,
             dept:String!
     }
 
     type appointmentData {
         _id: ID!,
         startDate:  String!,
+        name: String!
         time: String!,
-        endDate: String ,
         title: String,
         description: String,
-        hospital: String,
+        hospital: hospitalDetailsResponse!,
         dept: String,
         status:String!
     }
@@ -88,12 +98,24 @@ const schema = buildSchema(
         getAppointmentDetails(userId: String!) : getAppointmentDetails!
     }
 
+    type notesContent{
+        _id : ID!,
+        notesContent: String!,
+        date : String!
+    }
+    
+    type NoteCreatedResponse{
+        userId: String!,
+        notes: [notesContent],
+    }
     type rootMutations{
         registerUser(input : userCredentials! ) : validated!
         insertTask(input : insertToDoTask! ) : todoResponse!
         updateTask(input : updateTask!) : todoResponse!
         createAppointment(input : appointmentDetails!) : Boolean!
         modifyAppointment(input: updateAppointmentDetails!) : Boolean!
+        deleteAppointment(userId:String,_id: String!): Boolean!
+        createNotes(userId:String!,notesContent:String!,date:String!) : NoteCreatedResponse!
     }
 
     schema {

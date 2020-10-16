@@ -55,15 +55,32 @@ const appointments = new mongoDb.Schema({
       endDate: { type: String },
 			title: { type: String },
 			description: { type: String },
-			hospital: { type: String },
+			hospital: {
+				name : {type:String},
+				description: {type: String},
+				location: {type: String},
+				phoneNumber:{type:String}
+			},
       dept: { type: String },
       status : {type : String}
 		},
 	],
 });
 
+const notes = new mongoDb.Schema(
+	{
+		userId: { type: String },
+		notes: [
+			{
+			notesContent: {type : String},
+            date : {type : String},
+			},   
+		],
+	}
+)
 const toDoListSchema = mongoDb.model('todoList', todoList);
 const appointmentSchema = mongoDb.model('appointments', appointments);
 const userSchema = mongoDb.model('userCredential', userCredentials);
+const notesSchema = mongoDb.model('notes',notes)
 
-module.exports = { userSchema, toDoListSchema,appointmentSchema};
+module.exports = { userSchema, toDoListSchema,appointmentSchema,notesSchema};
