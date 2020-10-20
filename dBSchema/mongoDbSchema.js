@@ -50,7 +50,7 @@ const appointments = new mongoDb.Schema({
 	appointments: [
 		{
       name:{type: String},
-      startDate: { type: String, unique: true },
+      startDate: { type: String },
       time:{type: String,unique:true},
       endDate: { type: String },
 			title: { type: String },

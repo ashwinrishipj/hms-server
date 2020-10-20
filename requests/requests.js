@@ -108,6 +108,7 @@ const schema = buildSchema(
         getTodoList(userId : String!) : todoResponse
         getAppointmentDetails(userId: String!) : getAppointmentDetails!
         getNotesDetails(userId: String): NotesResponse
+        lockScreenValidation(userId:String!,password:String!) : Boolean!
     }
 
   

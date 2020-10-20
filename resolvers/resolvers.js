@@ -6,6 +6,7 @@ const {retrieveAppointments } = require('./queries/appointments');
 const {createAppointment, updateAppointmentDetails, deleteAppointment} = require('./mutation/mutateAppointments');
 const { createNotes } = require('./mutation/mutateNotes');
 const {retrieveNotes } = require('./queries/notes');
+const { lockScreenValidation } = require('./queries/lockScreen');
 
 resolvers = {
     registerUser : async (args) =>{
@@ -40,6 +41,9 @@ resolvers = {
     },
     getNotesDetails : async(args) =>{
         return retrieveNotes(args);
+    },
+    lockScreenValidation : async(args) =>{
+        return lockScreenValidation(args);
     }
 }
 
