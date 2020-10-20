@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "hms server built to help the hospitals to schedule,modify and monitor appointments and keep track of patients documents and related health services provided for each patient",
   "main": "index.js",
+  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,6 @@
     "graphql": "^15.3.0",
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.7",
-    "nodemon": "^2.0.4"
+    "mongoose": "^5.10.7"
   }
 }
