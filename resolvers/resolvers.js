@@ -5,6 +5,7 @@ const {retrieveToDoList } = require('./queries/todoTasks');
 const {retrieveAppointments } = require('./queries/appointments');
 const {createAppointment, updateAppointmentDetails, deleteAppointment} = require('./mutation/mutateAppointments');
 const { createNotes } = require('./mutation/mutateNotes');
+const {retrieveNotes } = require('./queries/notes');
 
 resolvers = {
     registerUser : async (args) =>{
@@ -36,6 +37,9 @@ resolvers = {
     },
     createNotes : async(args) =>{
         return createNotes(args);
+    },
+    getNotesDetails : async(args) =>{
+        return retrieveNotes(args);
     }
 }
 

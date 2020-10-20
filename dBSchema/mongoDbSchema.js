@@ -26,21 +26,21 @@ const todoList = new mongoDb.Schema({
 		{
 			title: { type: String },
 			content: { type: String },
-			date: { type: Date },
+			date: { type: String },
 		},
 	],
 	completed: [
 		{
 			title: { type: String },
 			content: { type: String },
-			date: { type: Date },
+			date: { type: String },
 		},
 	],
 	deleted: [
 		{
 			title: { type: String },
 			content: { type: String },
-			date: { type: Date },
+			date: { type: String },
 		},
 	],
 });

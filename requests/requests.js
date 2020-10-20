@@ -24,7 +24,7 @@ const schema = buildSchema(
         _id: ID,
         title: String,
         content: String,
-        date: String
+        date: String!,
     }
 
     input updateTask{
@@ -91,23 +91,25 @@ const schema = buildSchema(
         completed : [taskData],
         deleted : [taskData]
     }
-
-    type rootQuery{
-        validateUser(input : userCredentials!) : validated!
-        getTodoList(userId : String!) : todoResponse!
-        getAppointmentDetails(userId: String!) : getAppointmentDetails!
-    }
-
     type notesContent{
         _id : ID!,
         notesContent: String!,
         date : String!
     }
     
-    type NoteCreatedResponse{
+    type NotesResponse{
         userId: String!,
         notes: [notesContent],
     }
+
+    type rootQuery{
+        validateUser(input : userCredentials!) : validated!
+        getTodoList(userId : String!) : todoResponse
+        getAppointmentDetails(userId: String!) : getAppointmentDetails!
+        getNotesDetails(userId: String): NotesResponse
+    }
+
+  
     type rootMutations{
         registerUser(input : userCredentials! ) : validated!
         insertTask(input : insertToDoTask! ) : todoResponse!
@@ -115,7 +117,7 @@ const schema = buildSchema(
         createAppointment(input : appointmentDetails!) : Boolean!
         modifyAppointment(input: updateAppointmentDetails!) : Boolean!
         deleteAppointment(userId:String,_id: String!): Boolean!
-        createNotes(userId:String!,notesContent:String!,date:String!) : NoteCreatedResponse!
+        createNotes(userId:String!,notesContent:String!,date:String!) : NotesResponse!
     }
 
     schema {
