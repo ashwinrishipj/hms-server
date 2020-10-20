@@ -4,7 +4,8 @@ const schema = buildSchema(
 	`
     type validated{
         token : String!,
-        tokenExpiration : Int!
+        tokenExpiration : Int!,
+        userId :String
     }
 
     input userCredentials{

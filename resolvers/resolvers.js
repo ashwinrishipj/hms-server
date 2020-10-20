@@ -1,5 +1,5 @@
 const { insertTask, updateTask } = require('./mutation/mutateToDoList');
-const registerUser = require('./mutation/registerUser');
+const {registerUser} = require('./mutation/registerUser');
 const {authenticateUser} = require('./queries/authentication'); 
 const {retrieveToDoList } = require('./queries/todoTasks');
 const {retrieveAppointments } = require('./queries/appointments');

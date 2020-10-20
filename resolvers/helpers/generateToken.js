@@ -6,7 +6,7 @@ const generateToken = (userID, userEmail) => {
     "superPrivateKey",
     { expiresIn: "5h" }
   );
-  return { token: token, tokenExpiration: 1 };
+  return { token: token, tokenExpiration: 1,userId: userID };
 };
 
 module.exports = { generateToken };
