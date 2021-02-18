@@ -16,6 +16,9 @@ const userCredentials = new mongoDb.Schema({
 	dateRegistered: {
 		type: Date,
 	},
+	otp: {
+		type: String
+	}
 });
 
 const todoList = new mongoDb.Schema({
@@ -78,6 +81,7 @@ const notes = new mongoDb.Schema(
 		],
 	}
 )
+
 const toDoListSchema = mongoDb.model('todoList', todoList);
 const appointmentSchema = mongoDb.model('appointments', appointments);
 const userSchema = mongoDb.model('userCredential', userCredentials);

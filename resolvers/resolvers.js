@@ -7,6 +7,7 @@ const {createAppointment, updateAppointmentDetails, deleteAppointment} = require
 const { createNotes } = require('./mutation/mutateNotes');
 const {retrieveNotes } = require('./queries/notes');
 const { lockScreenValidation } = require('./queries/lockScreen');
+const { resetPassword } = require('./queries/resetPasword');
 
 resolvers = {
     registerUser : async (args) =>{
@@ -44,7 +45,11 @@ resolvers = {
     },
     lockScreenValidation : async(args) =>{
         return lockScreenValidation(args);
+    },
+    resetPassword : async(args) =>{
+        return resetPassword(args);
     }
+
 }
 
 module.exports = {resolvers};

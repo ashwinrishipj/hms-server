@@ -1,7 +1,7 @@
 var { buildSchema } = require('graphql');
 
 const schema = buildSchema(
-	`
+    `
     type validated{
         token : String!,
         tokenExpiration : Int!,
@@ -60,7 +60,6 @@ const schema = buildSchema(
 			hospital: hospitalDetails!
             dept: String!
     }
-
     input updateAppointmentDetails{
             _id: ID,
             name: String!,
@@ -68,7 +67,6 @@ const schema = buildSchema(
             time:String!,
             dept:String!
     }
-
     type appointmentData {
         _id: ID!,
         startDate:  String!,
@@ -97,21 +95,22 @@ const schema = buildSchema(
         notesContent: String!,
         date : String!
     }
-    
     type NotesResponse{
         userId: String!,
         notes: [notesContent],
     }
-
+    input forgetPassword{
+        emailId: String!,
+        verification: String
+    }
     type rootQuery{
         validateUser(input : userCredentials!) : validated!
         getTodoList(userId : String!) : todoResponse
         getAppointmentDetails(userId: String!) : getAppointmentDetails!
         getNotesDetails(userId: String): NotesResponse
         lockScreenValidation(userId:String!,password:String!) : Boolean!
+        resetPassword(input: forgetPassword): Boolean
     }
-
-  
     type rootMutations{
         registerUser(input : userCredentials! ) : validated!
         insertTask(input : insertToDoTask! ) : todoResponse!
@@ -121,7 +120,6 @@ const schema = buildSchema(
         deleteAppointment(userId:String,_id: String!): Boolean!
         createNotes(userId:String!,notesContent:String!,date:String!) : NotesResponse!
     }
-
     schema {
         query : rootQuery,
         mutation : rootMutations
