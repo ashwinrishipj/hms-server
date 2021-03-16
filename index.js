@@ -38,6 +38,7 @@ io.on("connection", (socket) => {
 
   const { roomId } = socket.handshake.query;
   socket.join(roomId);
+  console.log("rommId:",roomId)
 
   // Listen for new messages
   socket.on("newChatMessage", (data) => {
