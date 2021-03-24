@@ -60,6 +60,23 @@ const schema = buildSchema(
 			hospital: hospitalDetails!
             dept: String!
     }
+    input doctorData {
+                name:String!,
+				qualification:String!,
+				experience:String!,
+				workingOn:String!,
+				description:String!,
+				contactDetails:String!
+    }
+    input doctorAppointmentDetails {
+        userId: String!,
+        name: String!,
+        startDate:  String!,
+        time: String!,
+        phoneNumber: String!,
+        description: String!,
+        doctorDetails: doctorData!
+    }
     input updateAppointmentDetails{
             _id: ID,
             name: String!,
@@ -116,6 +133,7 @@ const schema = buildSchema(
         insertTask(input : insertToDoTask! ) : todoResponse!
         updateTask(input : updateTask!) : todoResponse!
         createAppointment(input : appointmentDetails!) : Boolean!
+        createDoctorAppointment(input : doctorAppointmentDetails!) : Boolean!
         modifyAppointment(input: updateAppointmentDetails!) : Boolean!
         deleteAppointment(userId:String,_id: String!): Boolean!
         createNotes(userId:String!,notesContent:String!,date:String!) : NotesResponse!

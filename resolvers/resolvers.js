@@ -8,6 +8,7 @@ const { createNotes } = require('./mutation/mutateNotes');
 const {retrieveNotes } = require('./queries/notes');
 const { lockScreenValidation } = require('./queries/lockScreen');
 const { resetPassword } = require('./queries/resetPasword');
+const { createDoctorAppointment } = require('./mutation/mutateDoctorAppointment');
 
 resolvers = {
     registerUser : async (args) =>{
@@ -27,6 +28,9 @@ resolvers = {
     },
     createAppointment : async(args) =>{
         return createAppointment(args);
+    },
+    createDoctorAppointment : async(args) =>{
+        return createDoctorAppointment(args);
     },
     getAppointmentDetails: async (args) =>{
         return retrieveAppointments(args);
@@ -49,7 +53,6 @@ resolvers = {
     resetPassword : async(args) =>{
         return resetPassword(args);
     }
-
 }
 
 module.exports = {resolvers};

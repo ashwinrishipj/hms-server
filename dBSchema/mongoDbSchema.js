@@ -52,20 +52,43 @@ const appointments = new mongoDb.Schema({
 	userId: { type: String },
 	appointments: [
 		{
-      name:{type: String},
-      startDate: { type: String },
-      time:{type: String,unique:true},
-      endDate: { type: String },
+			name: { type: String },
+			startDate: { type: String },
+			time: { type: String, unique: true },
+			endDate: { type: String },
 			title: { type: String },
 			description: { type: String },
 			hospital: {
-				name : {type:String},
-				description: {type: String},
-				location: {type: String},
-				phoneNumber:{type:String}
+				name: { type: String },
+				description: { type: String },
+				location: { type: String },
+				phoneNumber: { type: String }
 			},
-      dept: { type: String },
-      status : {type : String}
+			dept: { type: String },
+			status: { type: String }
+		},
+	],
+});
+
+const doctorAppointments = new mongoDb.Schema({
+	userId: { type: String },
+	appointments: [
+		{
+			name: { type: String },
+			startDate: { type: String },
+			time: { type: String, unique: true },
+			endDate: { type: String },
+			title: { type: String },
+			description: { type: String },
+			doctorDetails: {
+				name: { type: String },
+				qualification: { type: String },
+				experience: { type: String },
+				workingOn: { type: String },
+				description: { type: String },
+				contactDetails: { type: String },
+			},
+			status: { type: String }
 		},
 	],
 });
@@ -75,9 +98,9 @@ const notes = new mongoDb.Schema(
 		userId: { type: String },
 		notes: [
 			{
-			notesContent: {type : String},
-            date : {type : String},
-			},   
+				notesContent: { type: String },
+				date: { type: String },
+			},
 		],
 	}
 )
@@ -85,6 +108,7 @@ const notes = new mongoDb.Schema(
 const toDoListSchema = mongoDb.model('todoList', todoList);
 const appointmentSchema = mongoDb.model('appointments', appointments);
 const userSchema = mongoDb.model('userCredential', userCredentials);
-const notesSchema = mongoDb.model('notes',notes)
+const notesSchema = mongoDb.model('notes', notes)
+const doctorAppointmentSchema = mongoDb.model('doctorAppointments', doctorAppointments)
 
-module.exports = { userSchema, toDoListSchema,appointmentSchema,notesSchema};
+module.exports = { userSchema, toDoListSchema, appointmentSchema, notesSchema, doctorAppointmentSchema };
