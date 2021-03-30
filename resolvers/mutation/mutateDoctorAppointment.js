@@ -35,7 +35,7 @@ const createDoctorAppointment = async (args) => {
 
         insertAppointment = await appointments.save();
         if (!insertAppointment) {
-            throw new Error('\n error in inserting to-do',insertAppointment);
+            throw new Error('\n error in inserting new doctor appointents',insertAppointment);
         }
         console.log('-----Insertion completed -----');
         return 1;

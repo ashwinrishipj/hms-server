@@ -95,10 +95,26 @@ const schema = buildSchema(
         dept: String,
         status:String!
     }
+    type doctorDetails {
+        name:String,
+        qualification:String,
+        experience:String,
+        workingOn:String,
+        description:String,
+        contactDetails:String
+    }
+    type doctorAppointmentData{
+        name: String,
+        startDate:  String,
+        time: String,
+        description: String,
+        doctorDetails: doctorDetails
+    }
 
     type getAppointmentDetails {
         userId: String!,
-        appointments:[appointmentData]
+        appointments:[appointmentData],
+        doctorAppointments:[doctorAppointmentData]
     }
 
     type todoResponse{
