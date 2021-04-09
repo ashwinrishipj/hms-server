@@ -21,13 +21,6 @@ const schema = buildSchema(
         date: String!
     }
 
-    type taskData{
-        _id: ID,
-        title: String,
-        content: String,
-        date: String!,
-    }
-
     input updateTask{
         userId: String!,
         id: String!,
@@ -44,12 +37,8 @@ const schema = buildSchema(
         location:String!,
         phoneNumber:String!
     }
-    type hospitalDetailsResponse{
-        name: String!,
-        description: String!,
-        location:String!,
-        phoneNumber:String!
-    }
+
+
     input appointmentDetails {
             userId: String!,
             name: String!,
@@ -95,6 +84,23 @@ const schema = buildSchema(
         dept: String,
         status:String!
     }
+    
+    type mutateContentData{
+        emailId:String,
+        date:String,
+        subject:String,
+        content:String
+    }
+
+    type fetchMailData{
+        emailId : String!,
+        inbox:[mutateContentData],
+        sent:[mutateContentData],
+        starred:[mutateContentData],
+        deleted:[mutateContentData],
+        social:[mutateContentData]
+    }
+
     type doctorDetails {
         name:String,
         qualification:String,
@@ -110,7 +116,12 @@ const schema = buildSchema(
         description: String,
         doctorDetails: doctorDetails
     }
-
+    type hospitalDetailsResponse{
+        name: String!,
+        description: String!,
+        location:String!,
+        phoneNumber:String!
+    }
     type getAppointmentDetails {
         userId: String!,
         appointments:[appointmentData],
@@ -123,10 +134,27 @@ const schema = buildSchema(
         completed : [taskData],
         deleted : [taskData]
     }
+
+    type taskData{
+        _id: ID,
+        title: String,
+        content: String,
+        date: String!,
+    }
     type notesContent{
         _id : ID!,
         notesContent: String!,
         date : String!
+    }
+    input mailContentData{
+        emailId:String,
+        date:String,
+        subject:String,
+        content:String
+    }
+    input sendMailData{
+        emailId : String!, 
+        sent:[mailContentData],
     }
     type NotesResponse{
         userId: String!,
@@ -143,6 +171,7 @@ const schema = buildSchema(
         getNotesDetails(userId: String): NotesResponse
         lockScreenValidation(userId:String!,password:String!) : Boolean!
         resetPassword(input: forgetPassword): Boolean
+        getMailData(emailId: String!) : fetchMailData!
     }
     type rootMutations{
         registerUser(input : userCredentials! ) : validated!
@@ -153,7 +182,9 @@ const schema = buildSchema(
         modifyAppointment(input: updateAppointmentDetails!) : Boolean!
         deleteAppointment(userId:String,_id: String!): Boolean!
         createNotes(userId:String!,notesContent:String!,date:String!) : NotesResponse!
+        sendMail(input:sendMailData) : Boolean!
     }
+
     schema {
         query : rootQuery,
         mutation : rootMutations

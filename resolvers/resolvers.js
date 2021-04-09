@@ -5,10 +5,12 @@ const {retrieveToDoList } = require('./queries/todoTasks');
 const {retrieveAppointments } = require('./queries/appointments');
 const {createAppointment, updateAppointmentDetails, deleteAppointment} = require('./mutation/mutateAppointments');
 const { createNotes } = require('./mutation/mutateNotes');
-const {retrieveNotes } = require('./queries/notes');
+const { retrieveNotes } = require('./queries/notes');
 const { lockScreenValidation } = require('./queries/lockScreen');
 const { resetPassword } = require('./queries/resetPasword');
 const { createDoctorAppointment } = require('./mutation/mutateDoctorAppointment');
+const { fetchMail } = require('./queries/fetchMail');
+const { sendMail } = require('./mutation/mutateMail');
 
 resolvers = {
     registerUser : async (args) =>{
@@ -52,7 +54,13 @@ resolvers = {
     },
     resetPassword : async(args) =>{
         return resetPassword(args);
-    }
+    },
+    getMailData : async (args)=>{
+        return fetchMail(args);
+    },
+    sendMail : async(args) =>{
+        return sendMail(args);
+    } 
 }
 
 module.exports = {resolvers};
